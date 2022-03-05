@@ -1,0 +1,24 @@
+{
+  "name": "fn-ipfs-broker",
+  "version": "1.0.0",
+  "description": "fn-ipfs-broker",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nft-blog-site/fn-ipfs-broker.git"
+  },
+  "keywords": [],
+  "author": "Robert Collins <roberto.tomas.cuentas@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nft-blog-site/fn-ipfs-broker/issues"
+  },
+  "homepage": "https://github.com/nft-blog-site/fn-ipfs-broker#readme",
+  "dependencies": {
+    "ipfs-http-client": "^56.0.1"
+  }
+}
