@@ -1,24 +1,27 @@
 {
   "name": "fn-ipfs-broker",
   "version": "1.0.0",
-  "description": "fn-ipfs-broker",
-  "main": "src/index.js",
-  "type": "module",
+  "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nft-blog-site/fn-ipfs-broker.git"
+  "devDependencies": {
+    "@azure/functions": "^1.2.3",
+    "@types/parse-multipart": "^1.0.0",
+    "azurite": "^3.16.0",
+    "module-alias": "^2.2.2",
+    "typescript": "^4.0.0"
   },
-  "keywords": [],
-  "author": "Robert Collins <roberto.tomas.cuentas@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nft-blog-site/fn-ipfs-broker/issues"
-  },
-  "homepage": "https://github.com/nft-blog-site/fn-ipfs-broker#readme",
   "dependencies": {
-    "ipfs-http-client": "^56.0.1"
+    "http-status-enum": "^1.0.2",
+    "ipfs-http-client": "^56.0.1",
+    "parse-multipart": "^1.0.4"
+  },
+  "_moduleAliases": {
+    "~ipfsFileUpload": "dist/ipfsFileUpload"
   }
 }
