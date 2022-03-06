@@ -4,16 +4,18 @@ import HTTP_STATUS_CODES from 'http-status-enum'
 
 import { requestResolver } from '~ipfsFileUpload/utilities/request-resolver'
 import { invalidRequestPayloadError } from '~ipfsFileUpload/actions/errors/invalid-request-payload.error'
+import { copy } from '~ipfsFileUpload/actions/errors/copy'
 import { validateRequest } from './validate-request'
 import { addFromBuffer } from './add-from-buffer'
-import { copy } from '../errors/copy'
 
 
-export const add = (context: Context, req: HttpRequest) => {
+/* process an http request for adding to our ipfs node(s). */
+export const add = async (context: Context, req: HttpRequest) => {
   const resolveTransaction = requestResolver(context.res)
   
   const invalidRequest = validateRequest(req)
   if (invalidRequest) {
+    context.log.error('error', invalidRequest)
     resolveTransaction(invalidRequestPayloadError(invalidRequest))
     return
   }
@@ -26,8 +28,9 @@ export const add = (context: Context, req: HttpRequest) => {
 
     // The file buffer is corrupted or incomplete ?
     if (!parts?.length) {
-      const body = copy.errors.body.badBuffer
-      resolveTransaction(invalidRequestPayloadError({ body }))
+      const message = copy.errors.body.badBuffer
+      context.log.error('error', invalidRequestPayloadError({ message }))
+      resolveTransaction(invalidRequestPayloadError({ message }))
     }
 
     context.log(
@@ -37,20 +40,21 @@ export const add = (context: Context, req: HttpRequest) => {
       parts[0]?.data?.length
     )
 
-    const body = addFromBuffer(
+    const body = await addFromBuffer(
       `${req.query?.path}/${req.query?.filename}`,
       parts[0]?.data
     )
-    
+    context.log({body})
+
     resolveTransaction({
       status: HTTP_STATUS_CODES.OK,
       body
     })
   } catch (err) {
-    context.log.error(err.message)
+    context.log.error('500 error', err.message)
     resolveTransaction({
       status: HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
-      body: String(err.message)
+      body: {message: String(err.message)}
     })
   }
 }

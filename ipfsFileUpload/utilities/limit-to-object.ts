@@ -1,6 +1,7 @@
 import { Collection } from "./collection"
 
 
+/* trim a subject object to a template's properties */
 export function limitToObject<T extends Collection> (
   subject: Partial<T>, 
   template: T
