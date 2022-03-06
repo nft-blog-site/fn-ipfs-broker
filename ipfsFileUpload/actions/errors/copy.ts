@@ -12,5 +12,9 @@ export const copy: Collection = {
   },
   body: {
     badBuffer: 'file buffer is not correct (Content-type issue?)'
+  },
+  ipfs: {
+    addFromBuffer: 'there was an error adding the uploaded file',
+    pin: 'there was an error pinning the uploaded file'
   }
 }

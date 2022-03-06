@@ -7,6 +7,8 @@ import { invalidRequestPayloadError } from '~ipfsFileUpload/actions/errors/inval
 import { copy } from '~ipfsFileUpload/actions/errors/copy'
 import { validateRequest } from './validate-request'
 import { addFromBuffer } from './add-from-buffer'
+import { ipfsError } from '../errors/ipfs.error'
+import { pin } from './pin'
 
 
 /* process an http request for adding to our ipfs node(s). */
@@ -31,6 +33,7 @@ export const add = async (context: Context, req: HttpRequest) => {
       const message = copy.errors.body.badBuffer
       context.log.error('error', invalidRequestPayloadError({ message }))
       resolveTransaction(invalidRequestPayloadError({ message }))
+      return
     }
 
     context.log(
@@ -40,15 +43,29 @@ export const add = async (context: Context, req: HttpRequest) => {
       parts[0]?.data?.length
     )
 
-    const body = await addFromBuffer(
+    // TODO add the identity of the user to the directory to add and pin
+
+    const addResult = await addFromBuffer(
       `${req.query?.path}/${req.query?.filename}`,
       parts[0]?.data
     )
-    context.log({body})
+    if (!addResult) {
+      resolveTransaction(ipfsError({ message: copy.ipfs.addFromBuffer }))
+      return
+    }
+
+    const pinResult = await pin(addResult.cid)
+    if (!pinResult) {
+      resolveTransaction(ipfsError({ message: copy.ipfs.pin }))
+      return
+    }
 
     resolveTransaction({
       status: HTTP_STATUS_CODES.OK,
-      body
+      body: {
+        cid: String(addResult.cid),
+        ...pinResult
+      }
     })
   } catch (err) {
     context.log.error('500 error', err.message)

@@ -20,8 +20,8 @@ export const addFromBuffer = async (path: string, buffer: Buffer) => {
       txDuration: Number(after) - Number(before)
     })
   
-    return fileAdded[0]  
+    return fileAdded  
   } catch(error) {
-    LogService.logger.error('error', error)
+    LogService.logger.error('[addFromBuffer] error', error)
   }
 }
