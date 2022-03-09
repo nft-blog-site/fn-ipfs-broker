@@ -65,7 +65,7 @@ const addTrigger = async (context : Context, req : HttpRequest) => {
       body: {
         key: key.name,
         ipns: 'ipns://' + key.id,
-        ipfs: 'ipfs://' + body.value
+        ipfs: body.value.replace('/ipfs/', 'ipfs://')
       },
       status: HTTP_STATUS_CODES.OK
     })

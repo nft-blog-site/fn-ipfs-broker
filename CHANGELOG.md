@@ -4,6 +4,7 @@ Changelog
 ## release 1.0.2
 
 - added context.done() call in case this is needed exclusively in deployment
+- (hotfix) ipfs url had extra slash in response payload
 
 ## release 1.0.1
 
