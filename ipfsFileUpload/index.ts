@@ -25,7 +25,7 @@ const addTrigger = async (context : Context, req : HttpRequest) => {
     resolveTransaction(invalidRequestPayloadError(invalidRequest))
     return
   }
-
+  
   try { // Each chunk of the file is delimited by a special string
     const bodyBuffer = Buffer.from(req.body)
     const boundary = multipart.getBoundary(req.headers["content-type"])
@@ -70,10 +70,11 @@ const addTrigger = async (context : Context, req : HttpRequest) => {
       status: HTTP_STATUS_CODES.OK
     })
   } catch (err) {
-    context.log.error('500 error', err.message)
+    context.log.error('500 error', err.message, err.stack)
     resolveTransaction({
       status: HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
       body: {
+        status: HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
         message: String(err.message)
       }
     })

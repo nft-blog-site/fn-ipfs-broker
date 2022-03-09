@@ -11,7 +11,7 @@ export interface HttpTrigerOptions {
 
 export const factoryHttpTrigger = 
     ({functionName, fn, backendURL}: HttpTrigerOptions) : AzureFunction => {
-  return async (context: Context, req: HttpRequest) => {
+  return async function(context: Context, req: HttpRequest) {
     setLogger(context.log)
   
     setClientURL(backendURL)
