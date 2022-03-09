@@ -11,3 +11,4 @@ export const RESPONSE_DEFAULTS = {
 
 export const requestResolver = (res: Collection) => 
   (template: Collection) => Object.assign(res, RESPONSE_DEFAULTS, template)
+  

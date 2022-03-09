@@ -1,6 +1,7 @@
-import { Collection } from "./utilities/collection"
+import { Collection } from "~ipfsFileUpload/utilities/collection"
 
 
 export const config: Collection = {
-  IPFS_API_URI: process.env.IPFS_API_URI || 'http://localhost:5001',
+  fnName: 'ipfsFileUpload',
+  backendURL: process.env.IPFS_API_URI || 'http://localhost:5001',
 }

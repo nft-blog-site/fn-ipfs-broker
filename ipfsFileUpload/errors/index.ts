@@ -1,6 +1,7 @@
 import HTTP_STATUS_CODES from 'http-status-enum'
+
 import { limitToObject } from '~ipfsFileUpload/utilities/limit-to-object'
-import { LogService } from '~ipfsFileUpload/utilities/log.service'
+import { LogService } from '~ipfsFileUpload/services/log.service'
 
 
 /* create generic error response bodies */
