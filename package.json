@@ -1,0 +1,31 @@
+{
+  "name": "fn-ipfs-broker",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "start": "func start --typescript",
+    "test": "echo \"No tests yet...\""
+  },
+  "optionalDependencies": {
+    "azurite": "^3.16.0"
+  },
+  "devDependencies": {
+    "@azure/functions": "^1.2.3",
+    "@types/parse-multipart": "^1.0.0",
+    "ipfs-core-types": "^0.10.1",
+    "ipfs-utils": "^9.0.2",
+    "module-alias": "^2.2.2",
+    "typescript": "^4.0.0"
+  },
+  "dependencies": {
+    "http-status-enum": "^1.0.2",
+    "ipfs-http-client": "^56.0.1",
+    "parse-multipart": "^1.0.4"
+  },
+  "_moduleAliases": {
+    "~ipfsFileUpload": "dist/ipfsFileUpload"
+  }
+}
