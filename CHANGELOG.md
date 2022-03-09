@@ -4,7 +4,7 @@ Changelog
 ## release 1.0.1
 
 - an empty buffer still has a size, so a minimum body length was specified
-- the generic 500 error wrapper now includes a stacktrace
+- the generic **500** error wrapper now includes a stacktrace
 - error copy now reads from appropriate error copy file
 
 ## release 1.0
