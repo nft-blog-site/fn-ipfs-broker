@@ -1,4 +1,5 @@
-import { copy } from '~ipfsFileUpload/errors/copy'
+import { config } from './config'
+import { copy } from './copy'
 
 
 /* validate the query parameters and basic structure of the http post */
@@ -6,7 +7,8 @@ export const validateRequest = req => {
   // `filename` is required property to use multi-part npm package
   if (!req.headers?.filename) return { message: copy.headers.filename }
   
-  if (!req.body?.length) return { message: copy.body.bodyNotDefined }
+  if (req.body?.length < config['validate-request']['minimum-body-length']) 
+    return { message: copy.body.bodyNotDefined }
     
   // Content type is required to know how to parse multi-part form
   if (!req.headers?.["content-type"])
