@@ -17,8 +17,7 @@ env:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build-and-deploy:
+  preflight:
     runs-on: ubuntu-latest
     steps:
     - name: 'Checkout GitHub Action'
