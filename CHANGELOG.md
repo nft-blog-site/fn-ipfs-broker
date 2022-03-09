@@ -1,6 +1,10 @@
 Changelog
 ----
 
+## release 1.0.2
+
+- added context.done() call in case this is needed exclusively in deployment
+
 ## release 1.0.1
 
 - an empty buffer still has a size, so a minimum body length was specified

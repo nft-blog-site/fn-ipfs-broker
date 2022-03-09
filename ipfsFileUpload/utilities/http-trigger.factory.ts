@@ -19,5 +19,7 @@ export const factoryHttpTrigger =
     context.log(`[${functionName}] HTTP trigger function processed a request.`)
   
     await fn(context, req)
+
+    context.done()
   }
 }
